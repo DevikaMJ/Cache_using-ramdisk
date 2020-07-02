@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch libreoffice-writer
+Keywords=browser
+Type=Application
+Name=LibreOffice Writer
+Exec=/home/potti/Desktop/check.sh libreoffice-writer
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

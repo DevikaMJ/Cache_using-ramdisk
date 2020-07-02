@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch cheese
+Keywords=browser
+Type=Application
+Name=Cheese
+Exec=/home/potti/Desktop/check.sh cheese
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

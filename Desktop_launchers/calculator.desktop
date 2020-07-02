@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch gnome-calculator
+Keywords=text
+Type=Application
+Name=Calculator
+Exec=/home/potti/Desktop/check.sh gnome-calculator
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

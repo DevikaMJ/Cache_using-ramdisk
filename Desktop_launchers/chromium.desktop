@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch chrpmium
+Keywords=browser
+Type=Application
+Name=Chromium web
+Exec=/home/potti/Desktop/check.sh chromium
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch ubuntu software
+Keywords=browser
+Type=Application
+Name=Ubuntu Software
+Exec=/home/potti/Desktop/check.sh gnome-software
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

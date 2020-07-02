@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch firefox
+Keywords=browser
+Type=Application
+Name=Firefox Web Browser
+Exec=/home/potti/Desktop/check.sh firefox
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

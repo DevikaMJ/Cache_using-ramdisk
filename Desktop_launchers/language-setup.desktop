@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch language-setup
+Keywords=browser
+Type=Application
+Name=Language Setup
+Exec=/home/potti/Desktop/check.sh gnome-language-setup
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch solitare
+Keywords=browser
+Type=Application
+Name=AisleRiot Solitare
+Exec=/home/potti/Desktop/check.shsol
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

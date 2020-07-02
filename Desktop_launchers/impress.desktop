@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch impress
+Keywords=browser
+Type=Application
+Name=LibreOffice Impress
+Exec=/home/potti/Desktop/check.sh libreoffice-impress
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

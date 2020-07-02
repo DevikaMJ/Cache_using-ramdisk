@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch rhythmbox
+Keywords=browser
+Type=Application
+Name=Rhythm Box
+Exec=/home/potti/Desktop/check.sh rhythmbox
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

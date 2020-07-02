@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch word
+Keywords=browser
+Type=Application
+Name=LibreOffice Word
+Exec=/home/potti/Desktop/check.sh libreoffice-word
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

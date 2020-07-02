@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch terminal
+Keywords=browser
+Type=Application
+Name=Terminal
+Exec=/home/potti/Desktop/check gnome-terminal
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

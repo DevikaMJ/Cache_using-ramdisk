@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch nautilus
+Keywords=browser
+Type=Application
+Name=Files
+Exec=/home/potti/Desktop/check.sh nautilus
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

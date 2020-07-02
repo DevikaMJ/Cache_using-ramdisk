@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch gedit
+Keywords=browser
+Type=Application
+Name=Text Editor
+Exec=/home/potti/Desktop/check.sh gedit
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Comment=Launch thunderbird
+Keywords=browser
+Type=Application
+Name=Thunderbird Mail
+Exec=/home/potti/Desktop/check.sh thunderbird
+Terminal=false
+StartupNotify=true
+OnlyShownIn=GNOME;Unity;
+Categories=GNOME;GTK;Utility;Core;
+NoDisplay=false
