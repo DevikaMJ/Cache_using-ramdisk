@@ -1,0 +1,285 @@
+#!/usr/bin/python3
+
+import subprocess
+import os, operator
+from collections import defaultdict
+from itertools import combinations, chain
+from datetime import datetime
+import ast
+
+
+
+class Apriori:
+
+
+    def __init__(self, minSupport=0.2, minConfidence=0.7):
+        self.support_count = defaultdict(int)
+        self.minSupport = minSupport
+        self.minConfidence = minConfidence
+
+
+    def read_transactions_from_file(self, transaction_file):
+
+        with open (transaction_file, 'r') as infile:
+            transactions = [set(line.rstrip('\n').split(',')) 
+                            for line in infile]
+        
+            return transactions
+
+
+    def get_one_itemset(self, transactions):
+        one_itemset = set()
+        for transaction in transactions:
+            for item in transaction:
+                one_itemset.add(frozenset([item]))
+        
+        return one_itemset
+
+
+    def self_cross(self, Ck, itemset_size):
+
+        Ck_plus_1 = {itemset1.union(itemset2) 
+                    for itemset1 in Ck for itemset2 in Ck 
+                    if len(itemset1.union(itemset2)) == itemset_size}
+        return Ck_plus_1
+
+
+    def prune_Ck(self, Ck, Lk_minus_1, itemset_size):
+
+        Ck_ = set()
+        for itemset in Ck:
+            Ck_minus_1 = list(combinations(itemset, itemset_size-1))
+            flag = 0
+            for subset in Ck_minus_1:
+                if not frozenset(subset) in Lk_minus_1:
+                    flag = 1
+                    break
+            if flag == 0:
+                Ck_.add(itemset)
+        return Ck_
+
+
+    def get_min_supp_itemsets(self, Ck, transactions):
+
+        temp_freq = defaultdict(int)
+        
+        # update support count of each itemset
+        for transaction in transactions:
+            for itemset in Ck:
+                if itemset.issubset(transaction):
+                    temp_freq[itemset] += 1
+                    self.support_count[itemset] += 1
+
+        N = len(transactions)
+        Lk = [itemset for itemset, freq in temp_freq.items() 
+                    if freq/N > self.minSupport]
+        return set(Lk)
+
+
+    def apiori(self, transactions):
+
+        K_itemsets = dict()
+        Ck = self.get_one_itemset(transactions)
+        Lk = self.get_min_supp_itemsets(Ck, transactions)
+        k = 2
+        while len(Lk) != 0:
+            K_itemsets[k-1] = Lk
+            Ck = self.self_cross(Lk, k)
+            #print(k, len(Ck))
+            Ck = self.prune_Ck(Ck, Lk, k)
+            #print(k, len(Ck))
+            Lk = self.get_min_supp_itemsets(Ck, transactions)
+            #print(k, len(Lk))
+            k += 1
+
+        return K_itemsets
+
+
+    def subsets(self, iterable):
+
+        list_ = list(iterable)
+        subsets_ = chain.from_iterable(combinations(list_, len) 
+                for len in range(len(list_)+1))
+        subsets_ = list(map(frozenset, subsets_))
+        
+        return subsets_
+
+
+    def get_rules(self, K_itemsets):
+
+        rules = list()
+        for key, k_itemset in K_itemsets.items():
+            if key > 1:
+                for itemset in k_itemset:
+                    sub_itemsets = \
+                    {subset for subset in self.subsets(itemset) 
+                        if (subset != set() and len(subset) != len(itemset))}
+                    for subset in sub_itemsets:
+                        left = subset
+                        right = itemset.difference(subset)
+                        confidence = self.support_count[itemset]/self.support_count[left]
+                        if (confidence > self.minConfidence):
+                            rules.append((list(left), list(right), confidence))
+
+        rules.sort(key=operator.itemgetter(2), reverse=True)
+        return rules
+
+
+    def write_info(self, K_itemsets, rules, transactions_count):
+
+        N = transactions_count
+        x=[]
+        tot_itemset_count = 0
+        for key, values in K_itemsets.items():
+            #print('\n'+str(key)+'-itemsets:\n')
+            count = 0
+            for value in values:
+                support = self.support_count[value]/N
+                support_ct = self.support_count[value]
+                count += 1
+                tot_itemset_count += 1
+                #print(str(list(value))+' | support: '+str(support_ct)+'\n')
+                
+                if(key == len(K_itemsets)):
+                    x=str(list(value))
+            #print('Count: '+str(count)+'\n\n')
+        
+        #print('Total number of frequent itemset(s): '+str(tot_itemset_count)+'\n')
+        #print('\n\nRules:\n')
+
+        for rule in rules:
+            support_l = self.support_count[frozenset(rule[0])]
+            support_r = self.support_count[frozenset(rule[1])]
+            #print(str(rule[0])+'('+str(support_l)+')'+' -> '+str(rule[1])+ \
+                        #'('+str(support_r)+')'+' | confidence: '+str(rule[2])+'\n')
+        #print('\nTotal number of rules: '+str(len(rules))+'\n')
+        return x
+            
+
+if __name__ == '__main__':
+    
+    now=datetime.now()
+    hour=now.hour
+
+    if (hour==1):
+        in_transaction_file = "../time_files/1am.csv"	
+    if (hour==2):
+        in_transaction_file = "../time_files/2am.csv"  
+    if (hour==3):
+        in_transaction_file = "../time_files/3am.csv"
+    if (hour==4):
+        in_transaction_file = "../time_files/4am.csv"
+    if (hour==5):
+        in_transaction_file = "../time_files/5am.csv"
+    if (hour==6):
+        in_transaction_file = "../time_files/6am.csv"
+    if (hour==7):
+        in_transaction_file = "../time_files/7am.csv"
+    if (hour==8):
+        in_transaction_file = "../time_files/8am.csv"
+    if (hour==9):
+        in_transaction_file = "../time_files/9am.csv"
+    if (hour==10):
+        in_transaction_file = "../time_files/10am.csv"
+    if (hour==11):
+        in_transaction_file = "../time_files/11am.csv"
+    if (hour==12):
+        in_transaction_file = "../time_files/12pm.csv"
+    if (hour==13):
+        in_transaction_file = "../time_files/13pm.csv"
+    if (hour==14):
+        in_transaction_file = "../time_files/14pm.csv"
+    if (hour==15):
+        in_transaction_file = "../time_files/15pm.csv"
+    if (hour==16):
+        in_transaction_file = "../time_files/16pm.csv"
+    if (hour==17):
+        in_transaction_file = "../time_files/17pm.csv"
+    if (hour==18):
+        in_transaction_file = "../time_files/18pm.csv"
+    if (hour==19):
+        in_transaction_file = "../time_files/19pm.csv"
+    if (hour==20):
+        in_transaction_file = "../time_files/20pm.csv"
+    if (hour==21):
+        in_transaction_file = "../time_files/21pm.csv"
+    if (hour==22):
+        in_transaction_file = "../time_files/22pm.csv"
+    if (hour==23):
+        in_transaction_file = "../time_files/23pm.csv"
+    if (hour==00):
+        in_transaction_file = "../time_files/00am.csv"
+    # ap = Apriori()	
+    ap = Apriori(minSupport=0.2, minConfidence=0.4)
+    transactions = ap.read_transactions_from_file(in_transaction_file)
+    K_itemsets = ap.apiori(transactions)
+    rules = ap.get_rules(K_itemsets)
+    freq_item=ap.write_info(K_itemsets, rules, len(transactions))
+    #print(freq_item)
+    #print(type(freq_item))
+    freq_item=ast.literal_eval(freq_item)
+    #print(type(freq_item))
+    #print(freq_item)
+    freq=[]
+    for i in freq_item:
+    
+        a=i.lower()
+        freq.append(a)
+    #print(freq)
+    res=[]
+    for i in freq:
+        #if (i== "anaconda-navigator") :
+           # cmd=''' source ~/anaconda3/bin/activate root '''
+            #os.popen(cmd)
+            #d=q.read()
+            #command = ''' which anaconda-navigator '''
+            #a= os.popen(command)
+            #c=a.readline()
+            #res.append(c)
+        #else :
+            if(i == "Soffice" or i == "libreoffice-writer" or i == "libreoffice-impress" or i == "libreoffice-calc" or i == "libreoffice-draw"):
+                i = "libreoffice"
+            cmd=''' which '{}' '''.format(i)
+            #b=subprocess.check_output(cmd, shell=True)
+            #b=os.system(cmd)
+
+            #using another command for executing shell scripts
+            #b=[]
+            import os
+            p = os.popen(cmd)
+
+            #print(p)
+            b=""
+            while 1:
+                line = p.readline()
+                if not line: break
+                #b.append(line)
+                b=line
+
+            #print(b)
+
+            #b = b.decode('utf-8')
+            res.append(b)
+    #print(res)
+    
+    exe=[]
+    #exe=res.read()
+    #print(exe)
+    exe = list(map(str.strip, res))
+    #print(exe)
+
+
+    str1 = ''.join(exe)
+    
+    print(str1)
+
+    f = open("../temp/temp_val", "w")
+    for j in exe:
+        f.write(j+"\n")
+        print(j)
+    f.close()
+    
+    
+    
+
+

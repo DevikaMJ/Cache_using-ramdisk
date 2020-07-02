@@ -1,0 +1,156 @@
+#!/usr/bin/python3
+
+import subprocess
+import re
+import csv
+from datetime import datetime
+
+a=[]
+s=[]
+x=[]
+lst=[]
+cmd=''' libraries/p4.sh | awk '{print $2}' |sed "1d" '''
+x=subprocess.check_output(cmd, shell=True)
+
+x = x.decode('utf-8')
+
+a=re.findall(r'"(.*?)"',x)
+for i in a:
+    if i not in lst:
+        lst.append(i)
+now=datetime.now()
+
+current_time = now.strftime("%H:%M:%S")
+#print("Current Time =", current_time)
+hour=now.hour
+
+if (hour==1):
+    with open("../time_files/1am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==2):
+    with open("../time_files/2am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==3):
+    with open("../time_files/3am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==4):
+    with open("../time_files/4am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==5):
+    with open("../time_files/5am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==6):
+    with open("../time_files/6am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==7):
+    with open("../time_files/7am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==8):
+    with open("../time_files/8am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==9):
+    with open("../time_files/9am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==10):
+    with open("../time_files/10am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==11):
+    with open("../time_files/11am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==12):
+    with open("../time_files/12pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==13):
+    with open("../time_files/13pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==14):
+    with open("../time_files/14pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==15):
+    with open("../time_files/15pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==16):
+    with open("../time_files/16pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==17):
+    with open("../time_files/17pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==18):
+    with open("../time_files/18pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==19):
+    with open("../time_files/19pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==20):
+    with open("../time_files/20pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==21):
+    with open("../time_files/21pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        #if(lst != " " and lst != "\n" and lst != "\t" and lst != ""):
+        if(any(char.isalpha() for string in lst for char in string)):
+            wr.writerow(lst)
+        
+if (hour==22):
+    with open("../time_files/22pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==23):
+    with open("../time_files/23pm.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+if (hour==00):
+    with open("../time_files/00am.csv", "a") as fp:
+        wr = csv.writer(fp, dialect='excel')
+        wr.writerow(lst)
+        
+
+        
+        
+
+
+
+
+

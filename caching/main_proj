@@ -1,0 +1,19 @@
+#!/bin/bash
+
+python3 ../frequent_generator/freq
+
+echo "printing the files inside the temp_val"
+
+filename="../temp/temp_val"
+while read -r line; do
+    name="$line"
+    echo "$name"
+    x=/media/ramdisk
+    pattern=" |'"
+    if [[ $line =~ $pattern ]]
+    then
+      echo ""
+    else
+      cp $(echo $line) $(echo $x)
+    fi
+done < "$filename"

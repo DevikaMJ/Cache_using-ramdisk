@@ -1,0 +1,259 @@
+#!/bin/bash
+
+echo $1
+app="$1"
+
+sql="INSERT INTO req values ('$app', time('now'))"
+(echo $sql && echo ";") | sqlite3 /home/potti/Desktop/Project/db/cache.db
+
+/home/potti/Desktop/Project/performance/req $1
+
+case $1 in
+	"gedit")
+	if [[ -f /media/ramdisk/gedit ]] 
+	then
+		sql="INSERT INTO hit values ('$app', time('now'))"
+                (echo $sql && echo ";") | sqlite3 /home/potti/Desktop/Project/db/cache.db
+                /home/potti/Desktop/Project/performance/hitrate_get
+                notify-send Gedit "opens from cache"
+		/media/ramdisk/gedit
+                
+	else
+                notify-send Gedit "opens from disk"		
+                /usr/bin/gedit
+	fi
+
+	;;
+
+        "thunderbird")
+	if [[ -f /media/ramdisk/thunderbird ]] 
+	then
+		../performance/hit $1
+                ../performance/hitrate_get
+		notify-send Thunderbird "opens from cache"
+		/media/ramdisk/thunderbird
+	else
+		
+		/usr/bin/thunderbird
+		notify-send Thunderbird "opens from disk"
+	fi
+
+	;;
+
+	"gnome-terminal")
+	if [[ -f /media/ramdisk/gnome-terminal ]] 
+	then
+		sql="INSERT INTO hit values ('$app', time('now'))"
+                (echo $sql && echo ";") | sqlite3 /home/potti/Desktop/Project/db/cache.db
+                /home/potti/Desktop/Project/performance/hitrate_get
+                notify-send Terminal "opens from cache"
+		/media/ramdisk/gnome-terminal
+	else
+		notify-send Terminal "opens from disk"		
+                /usr/bin/gnome-terminal
+	fi
+	
+	;;
+        
+        "firefox")
+	if [[ -f /media/ramdisk/firefox ]] 
+	then
+		../performance/hit $1
+                ../performance/hitrate_get
+                notify-send Firefox "opens from cache"
+		/media/ramdisk/firefox
+	else
+		notify-send Firefox "opens from disk"		
+                /usr/bin/firefox
+	fi
+
+	;;
+	
+	"nautilus")
+	if [[ -f /media/ramdisk/nautilus ]] 
+	then
+		../performance/hit $1
+                ../performance/hitrate_get
+                notify-send Files "opens from cache"
+		/media/ramdisk/nautilus
+	else
+		notify-send Files "opens from disk"		
+                /usr/bin/nautilus
+	fi
+
+	;;
+	
+	"firefox")
+	if [[ -f /media/ramdisk/firefox ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/firefox
+	else
+		/usr/bin/firefox
+	fi
+	
+	;;
+
+	"rhythmbox")
+	if [[ -f /media/ramdisk/rhythmbox ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/rhythmbox
+	else
+		/usr/bin/rhythmbox
+	fi
+
+	;;
+	
+	"libreoffice-writer")
+	if [[ -f /media/ramdisk/libreoffice ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/rhythmbox
+	else
+		/usr/bin/libreoffice --writer
+	fi
+
+	;;
+
+	
+
+	"gnome-software")
+	if [[ -f /media/ramdisk/gnome-software ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/gnome-software
+	else
+		/usr/bin/gnome-software
+	fi
+
+	;;
+
+	"yelp")
+	if [[ -f /media/ramdisk/yelp ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/yelp
+	else
+		/usr/bin/yelp
+	fi
+
+	;;
+
+	"gnome-calculator")
+	if [[ -f /media/ramdisk/gnome-calculator ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/gnome-calculator
+	else
+		/usr/bin/gnome-calculator
+	fi
+
+	;;
+
+	"cheese")
+	if [[ -f /media/ramdisk/cheese ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/cheese
+	else
+		/usr/bin/cheese
+	fi
+
+	;;
+
+	"sol")
+	if [[ -f /media/ramdisk/sol ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/sol
+	else
+		/usr/games/sol
+	fi
+
+	;;
+
+	"chromium")
+	if [[ -f /media/ramdisk/chromium ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/chromium
+	else
+		/snap/bin/chromium
+	fi
+
+	;;
+
+	"google-chrome")
+	if [[ -f /media/ramdisk/google-chrome ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/google-chrome
+	else
+		/usr/bin/goolge-chrome
+	fi
+
+	;;
+
+	"gnome-language-selector")
+	if [[ -f /media/ramdisk/gnome-language-selector ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/gnome-language-selector
+	else
+		/usr/bin/gnome-language-selector
+	fi
+
+	;;
+
+	"calendar")
+	if [[ -f /media/ramdisk/calendar ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/calendar
+	else
+		/usr/bin/calendar
+	fi
+
+	;;
+
+	"libreoffice-impress")
+	if [[ -f /media/ramdisk/libreoffice ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/libreoffice --impress
+	else
+		/usr/bin/libreoffice --impress
+	fi
+
+	;;
+
+	"libreoffice-word")
+	if [[ -f /media/ramdisk/libreoffice ]] 
+	then
+		d=$(cat tot_hit)
+		echo $((d + 1)) > tot_hit
+		/media/ramdisk/libreoffice --word
+	else
+		/usr/bin/libreoffice --word
+	fi
+
+	;;
+	
+	*)
+	echo "no match"
+	;;
+esac

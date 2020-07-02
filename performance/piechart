@@ -1,0 +1,23 @@
+#!/usr/bin/python3
+
+import re
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+f1=open("/home/potti/Desktop/Project/temp/tot_req", 'r')
+f2=open("/home/potti/Desktop/Project/temp/tot_hit", 'r')
+labels = ['cache hit', 'cache miss']
+
+req = f1.readline()
+hit = f2.readline()
+miss = int(req) - int(hit)
+
+sizes = [hit, miss]
+
+fig, ax = plt.subplots()
+ax.pie(sizes, labels=labels, autopct='%1.1f%%')
+ax.axis('equal')  # Equal aspect ratio ensures the pie chart is circular.
+ax.set_title('Cache Hit Ratio')
+
+plt.show()

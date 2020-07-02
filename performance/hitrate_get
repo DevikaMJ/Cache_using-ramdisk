@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+echo $(sqlite3 /home/potti/Desktop/Project/db/cache.db "SELECT count(name) FROM req") > /home/potti/Desktop/Project/temp/tot_req
+cat ../temp/tot_req
+echo $(sqlite3 /home/potti/Desktop/Project/db/cache.db "SELECT count(name) FROM hit") > /home/potti/Desktop/Project/temp/tot_hit
+
+cat ../temp/tot_hit
+
+echo "done"

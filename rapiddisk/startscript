@@ -1,0 +1,15 @@
+#!/bin/sh
+
+#loads rapiddisk module
+modprobe rapiddisk
+modprobe rapiddisk-cache
+
+#creates one drive in ram with 1gb
+rapiddisk --attach 1024
+
+#formatting the created ramdisk with ext4 filesystem
+mkfs.ext4 /dev/rd0
+
+#mounting the partition
+mount /dev/rd0 /media/ramdisk
+
